@@ -1,0 +1,41 @@
+.container {
+	height: 175px;
+}
+
+.label {
+	clear: both;
+}
+
+img {
+	margin: 20px;
+}
+
+.characterButton {
+	float: left;
+	position: relative;
+	margin: 10px;
+
+}
+
+.characterName {
+	position: absolute;
+	width: 100%;
+	text-align: center;
+	top: 5px;
+
+}
+
+.healthPoints {
+	position: absolute;
+	width: 100%;
+	text-align: center;
+	bottom: 5px;
+}
+
+#enemies {
+	clear:both;
+}
+
+#message {
+	clear: both;
+}
