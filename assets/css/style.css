@@ -6,18 +6,6 @@ html {
 	margin-left: 35px;
 }
 
-h1 {
-	margin-top: 20px;
-	margin-bottom: 20px;
-	font-size: 32px;
-}
-
-.enemy-label, .hero-label {
-	font-size: 16px;
-	color: #a19e97;
-	padding-bottom: 5px;
-}
-
 .container {
 	height: 175px;
 }
@@ -27,9 +15,10 @@ h1 {
 	font-size: 20px;
 }
 
-img {
-	padding: 20px;
-	
+h1 {
+	margin-top: 20px;
+	margin-bottom: 20px;
+	font-size: 32px;
 }
 
 .character {
@@ -55,8 +44,27 @@ img {
 	bottom: 5px;
 }
 
+img {
+	padding: 20px;
+	
+}
+
+#enemies {
+	clear:both;
+}
+
 .battlefield-label {
 	color: #a19e97;
+}
+
+.enemy-label, .hero-label {
+	font-size: 16px;
+	color: #a19e97;
+	padding-bottom: 5px;
+}
+
+.hero {
+	margin: auto;
 }
 
 #hero {
@@ -78,7 +86,7 @@ img {
 	background-color: #a19e97;
 }
 
-.hero {
+.enemy {
 	margin: auto;
 }
 
@@ -88,15 +96,6 @@ img {
 	text-align: left;
 	width: 150px;
 }
-
-.enemy {
-	margin: auto;
-}
-
-#enemies {
-	clear:both;
-}
-
 
 #restart {
 	display: none;
