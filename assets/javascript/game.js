@@ -1,93 +1,90 @@
 $(document).ready(function() {
 
-	var userCharacter;
-	var userCharacterHealthPoints;
-	var currentDefender;
-	var defenderHealthPoints;
+	var characters = [{id: "hansSolo", name: "Hans Solo", image: "<img src='assets/images/hansSolo.jpeg' height='100px'>", healthPoints: 100, attackPower: 9, counterAttackPower: 10}, {id: "princessLeia", name: "Princess Leia", image: "<img src='assets/images/princessLeia.jpeg' height='100px'>", healthPoints: 110, attackPower: 7, counterAttackPower: 12}, {id: "yoda", name: "Yoda", image: "<img src='assets/images/Yoda.jpeg' height='100px'>", healthPoints: 115, attackPower: 8, counterAttackPower: 15}, {id: "R2D2", name: "R2-D2", image: "<img src='assets/images/R2-D2.jpeg' height='100px'>", healthPoints: 122, attackPower: 6, counterAttackPower: 20}];
+
+	var hero;
+	var enemy;
+	var heroHealthPoints;
+	var enemyHealthPoints;
 	var attackNumber = 1;
-	var round = 0;
-	var enemies = [];
+	var enemyNumber = 0;
 
-	$("#restartButton").prop("hidden", true);
-
-	$("button").click(function(){
-		$("#message").empty();
-	});
-
-	$(".characterButton").click(function(){
-		if (userCharacter == undefined) {
-			userCharacter = $(this).data();
-			userCharacterHealthPoints = userCharacter.baselineHealthPoints;
-			$(this).addClass("userCharacter");
-			$(".userCharacter").prop("disabled", true);
-			$(".characterButton").not(this).addClass("remainingEnemies");
-			$(".remainingEnemies").appendTo($("#enemies"));
-		} else {
-			currentDefender = $(this).data();
-			defenderHealthPoints = currentDefender.baselineHealthPoints; 
-			$(this).appendTo("#defender");
-			$(this).removeClass("remainingEnemies");
-			$(this).addClass("defender");
-			$(".characterButton").prop("disabled", true);
-		}
-		
-	});
-
-	$("#attackButton").click(function(){
-		if (currentDefender == undefined) {
-			$("#message").append("<p>No enemy here.</p>");
-		} else {
-	 		defenderHealthPoints -= userCharacter.attackPower * attackNumber;
-			$(".defender > p").empty();
-	 		$(".defender > p").append("<p>" + defenderHealthPoints + "</p>");
-			if (defenderHealthPoints <= 0) {
-				$(".defender > p").empty();
-	 			$(".defender > p").append("<p>" + currentDefender.baselineHealthPoints + "</p>");
-				enemies[round] = $(".defender").detach();
-				if (round < 2) {
-					$("#message").append("<p>You have defeated " + currentDefender.name +". You may choose to fight another enemy.</p>");
-					$(".remainingEnemies").prop("disabled", false);
-				} else {
-					$("#message").append("<p>You Won! Game Over!</p>");
-	 				$("#restartButton").prop("hidden", false);
-	 			}
-	 			round++;
-	 			currentDefender = undefined;
-		 	} else { 
-					userCharacterHealthPoints -= currentDefender.counterAttackPower;
-					$(".userCharacter > p").empty();
-	 				$(".userCharacter > p").append("<p>" + userCharacterHealthPoints + "</p>");
-					if (userCharacterHealthPoints <= 0) {
-						$("#message").append("<p>You have been defeated. Game Over.</p>");
-						$("#restartButton").prop("hidden", false);
-						$(".defender > p").empty();
-	 					$(".defender > p").append("<p>" + defender.baselineHealthPoints + "</p>");
-					} else {
-					$("#message").append("<p>You attacked " + currentDefender.name + " for " + userCharacter.attackPower * attackNumber + " damage. He attacked you back for " + currentDefender.counterAttackPower + " damage.</p>");
+	function addClickListeners() {
+	$('.character').click(assignCharacter);
 	}
 
-			}
-		attackNumber++;
+	function assignCharacter() {
+		if (hero && enemy) return;
+		if (hero) {
+			$(this).appendTo('#enemy');
+			$(this).addClass('enemy');
+			enemy = characters[this.getAttribute('value')];
+			enemyHealthPoints = enemy.healthPoints;
+			$("#attack").show();
+		} else {
+			$(this).appendTo('#hero');
+			$(this).addClass('hero');
+			hero = characters[this.getAttribute('value')];
+			heroHealthPoints = hero.healthPoints;
+			$(".character").not(this).appendTo("#enemies");
+			$(".character").not(this).css("background-color", "#a19e97");
 		}
-	});
+	}
 
-	$("#restartButton").click(function(){
-			$(this).prop("hidden", true);
-			for (var i = 0; i < 3; i++) {
-				$(enemies[i]).appendTo($("#characters"));
+	function buildCharacters() {
+	for (var i = 0; i < characters.length; i++) {
+		var currentCharacter = characters[i];
+		$('#characters').append('<div class="character" id=' + currentCharacter.id + ' value=' + i +' ><p class="characterName">' + currentCharacter.name + '</p>' + currentCharacter.image + '<p class="healthPoints">' + currentCharacter.healthPoints + '</p></div>')
+
+	}
+
+	}
+
+	 $("#attack").click(function() {
+	 		enemyHealthPoints -= hero.attackPower * attackNumber;
+	 		$(".enemy > .healthPoints").html('<p>' + enemyHealthPoints + '</p>');
+ 			if (enemyHealthPoints <= 0) {
+				$(".enemy").detach();
+				if (enemyNumber < (characters.length - 2)) {
+					$("#message").html("<p>You have defeated " + enemy.name + ". You may choose to fight another enemy.</p>");
+					$("#attack").hide();
+				} else {
+					$("#message").html("<p>You Won! Game Over!</p>");
+					$("#attack").hide();
+	 				$("#restart").show();
+	 			}
+	 			enemyNumber++;
+	 			enemy = undefined;
+		 	} else { 
+					heroHealthPoints -= enemy.counterAttackPower;
+	 				$(".hero > .healthPoints").html("<p>" + heroHealthPoints + "</p>");
+					if (heroHealthPoints <= 0) {
+						$(".hero").detach();
+						$("#message").html("<p>You have been defeated. Game Over.</p>");
+						$("#attack").hide();
+						$("#restart").show();
+					} else {
+					$("#message").html("<p>You attacked " + enemy.name + " for " + hero.attackPower * attackNumber + " damage. He attacked you back for " + enemy.counterAttackPower + " damage.</p>");
+				}
 			}
-			$(".userCharacter").appendTo($("#characters"));
-			$(".userCharacter > p").empty();
-	 		$(".userCharacter > p").append("<p>" + userCharacter.baselineHealthPoints + "</p>");
-			$(".characterButton").prop("disabled", false);
-			$(".characterButton").removeClass("userCharacter");
-			$(".characterButton").removeClass("defender");
-			$(".characterButton").removeClass("remainingEnemies");
-			userCharacter = undefined;
-			attackNumber = 1;
-			round = 0;
 
+			attackNumber++;
 	});
 
-	
+	$("#restart").click(function() {
+			$(this).hide();
+			$(".character").detach();
+			buildCharacters();
+			addClickListeners(); 
+			hero = undefined;
+			enemy = undefined;
+			attackNumber = 1;
+			enemyNumber = 0;
+	});
+
+	buildCharacters();
+	addClickListeners(); 
+
 });
+
+

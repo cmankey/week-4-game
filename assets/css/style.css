@@ -1,19 +1,42 @@
+html {
+	background-image: url("../images/background.jpg");
+	font-family: 'Arial', 'Helvetica Neue', Helvetica, sans-serif;
+	font-size: 14px;
+	color: black;
+	margin-left: 35px;
+}
+
+h1 {
+	margin-top: 20px;
+	margin-bottom: 20px;
+	font-size: 32px;
+}
+
+.enemy-label, .hero-label {
+	font-size: 16px;
+	color: #a19e97;
+	padding-bottom: 5px;
+}
+
 .container {
 	height: 175px;
 }
 
 .label {
 	clear: both;
+	font-size: 20px;
 }
 
 img {
-	margin: 20px;
+	padding: 20px;
+	
 }
 
-.characterButton {
+.character {
 	float: left;
 	position: relative;
 	margin: 10px;
+	background-color: #c7aba7;
 
 }
 
@@ -32,10 +55,56 @@ img {
 	bottom: 5px;
 }
 
+.battlefield-label {
+	color: #a19e97;
+}
+
+#hero {
+	margin-top: 10px;	
+	float: left;
+	text-align: left;
+	width: 150px;
+}
+
+.attack-container {
+	float: left;;
+	width: 150px;
+}
+
+#attack {
+	float: left;
+	display: none;
+	margin: 35px;
+	background-color: #a19e97;
+}
+
+.hero {
+	margin: auto;
+}
+
+#enemy {
+	margin-top: 10px;	
+	float: left;
+	text-align: left;
+	width: 150px;
+}
+
+.enemy {
+	margin: auto;
+}
+
 #enemies {
 	clear:both;
 }
 
+
+#restart {
+	display: none;
+	background-color: #a19e97;
+	margin-bottom: 10px;
+}
+
 #message {
 	clear: both;
+	padding-bottom: 10px;
 }
