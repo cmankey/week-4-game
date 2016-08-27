@@ -1,6 +1,6 @@
 $(document).ready(function() {
 
-	var characters = [{id: "hansSolo", name: "Hans Solo", image: "<img src='assets/images/HansSolo.jpeg' height='100px'>", healthPoints: 100, attackPower: 9, counterAttackPower: 10}, {id: "princessLeia", name: "Princess Leia", image: "<img src='assets/images/princessLeia.jpeg' height='100px'>", healthPoints: 110, attackPower: 7, counterAttackPower: 12}, {id: "yoda", name: "Yoda", image: "<img src='assets/images/Yoda.jpeg' height='100px'>", healthPoints: 115, attackPower: 8, counterAttackPower: 15}, {id: "R2D2", name: "R2-D2", image: "<img src='assets/images/R2-D2.jpeg' height='100px'>", healthPoints: 122, attackPower: 6, counterAttackPower: 20}];
+	var characters = [{id: "hansSolo", name: "Hans Solo", image: "<img src='assets/images/hansSolo.jpeg' height='100px'>", healthPoints: 100, attackPower: 9, counterAttackPower: 10}, {id: "princessLeia", name: "Princess Leia", image: "<img src='assets/images/princessLeia.jpeg' height='100px'>", healthPoints: 110, attackPower: 7, counterAttackPower: 12}, {id: "yoda", name: "Yoda", image: "<img src='assets/images/yoda.jpeg' height='100px'>", healthPoints: 115, attackPower: 8, counterAttackPower: 15}, {id: "R2D2", name: "R2-D2", image: "<img src='assets/images/R2-D2.jpeg' height='100px'>", healthPoints: 122, attackPower: 6, counterAttackPower: 20}];
 
 	var hero;
 	var enemy;
